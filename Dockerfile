@@ -1,7 +1,6 @@
 FROM node:alpine
 
 ENV NODE_ENV production
-COPY scratch-gui /usr/src/app/scratch-gui
 
 RUN apk add --no-cache git bash \
 #    && mkdir -p /usr/src/app \
