@@ -1,12 +1,9 @@
-FROM node:alpine
-
-ENV NODE_ENV production
-
-COPY . /data
-RUN apk add --no-cache git bash \
-    && cd data \
-    && npm install
-
-WORKDIR /data
-EXPOSE 8090
-CMD ["npm","start"]
+FROM node:8-alpine
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+RUN apk update && apk upgrade && \
+    apk add --no-cache git
+COPY package.json /usr/src/app/
+RUN npm install && npm cache clean --force
+COPY . /usr/src/app
+CMD [ "npm", "start" ]
